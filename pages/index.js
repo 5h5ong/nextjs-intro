@@ -1,12 +1,10 @@
-import { useState } from "react";
+import NavBar from "../components/NavBar";
 
 export default function Hello() {
-  const [counter, setCounter] = useState(0);
-
   return (
     <div>
-      <h1>Hello! {counter}</h1>
-      <button onClick={() => setCounter((p) => p + 1)}>+</button>
+      <NavBar />
+      <h1>Hello! </h1>
     </div>
   );
 }
