@@ -1,14 +1,13 @@
-import { useRouter } from "next/router";
 import Seo from "../../components/Seo";
 
-export default function Detail({ params }) {
-  const [title, id] = params;
-
+export default function Detail({ title, overview, releaseDate, voteAverage }) {
   return (
     <div>
       <Seo title={title} />
-      <h4>{title ?? "Loading..."}</h4>
-      <h5>{id ?? "Loading..."}</h5>
+      <h3>{title}</h3>
+      <div>{releaseDate}</div>
+      <div>{overview}</div>
+      <div>{voteAverage}</div>
     </div>
   );
 }
@@ -16,10 +15,24 @@ export default function Detail({ params }) {
 /**
  * getServerSideProps()의 컨텍스트에서 router 데이터를 가져올 수 있음. 대박..
  */
-export function getServerSideProps({ params: { params } }) {
-  return {
-    props: {
-      params,
-    },
-  };
+export async function getServerSideProps({ params: { params } }) {
+  const [title, id] = params;
+  try {
+    const response = await fetch(`http://localhost:3000/api/movies/${id}`);
+    const json = await response.json();
+    const { overview, release_date, vote_average } = json;
+
+    return {
+      props: {
+        title: title,
+        overview: overview,
+        releaseDate: release_date,
+        voteAverage: vote_average,
+      },
+    };
+  } catch {
+    return {
+      notFound: true,
+    };
+  }
 }
