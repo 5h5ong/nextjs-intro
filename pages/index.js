@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Seo from "../components/Seo";
 
 export default function Hello({ results }) {
-  const [movies, setMovies] = useState();
-
   return (
     <div className="container">
       <Seo title="Home" />
