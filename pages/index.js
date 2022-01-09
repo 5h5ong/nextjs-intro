@@ -26,6 +26,7 @@ export default function Hello({ results }) {
           width: 50%;
           flex-direction: column;
           justify-items: center;
+          cursor: pointer;
         }
         .movie img {
           max-width: 100%;
